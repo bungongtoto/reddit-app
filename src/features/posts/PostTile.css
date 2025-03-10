@@ -1,0 +1,39 @@
+.postTile {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border: 1px solid var(--secondary-color);
+    border-radius: 20px;
+}
+
+.tile-left {
+    width: 10%;
+    text-align:  center;
+    font-size: 2rem;
+}
+
+.tile-right {
+    width: 80%;
+}
+
+.tile-right-middle{
+    width: 100%;
+}
+
+.tile-right-middle img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 20px;
+
+}
+
+.tile-right-bottom {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+

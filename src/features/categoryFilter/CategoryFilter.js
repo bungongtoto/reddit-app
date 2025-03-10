@@ -1,6 +1,7 @@
 import "./CategoryFilter.css";
 
 function CategoryFilter() {
+  const handleClick = () => {};
   return (
     <div className="category-filter">
       <button>Arts</button>
