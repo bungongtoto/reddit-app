@@ -1,0 +1,24 @@
+.category-filter {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    padding: 40px 0 ;
+    justify-content: space-around;
+}
+
+.category-filter button {
+    font-size: 1.3rem;
+    border-color: transparent;
+    border-radius: 5px;
+    background-color: skyblue;
+}
+
+.category-filter button:hover{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.category-filter button:active{
+    background-color: var(--secondary-color);
+    color: white;
+}

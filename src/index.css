@@ -1,5 +1,6 @@
 :root{
   --primary-color:  #F34325;
+  --secondary-color: burlywood;
 }
 
 body {
@@ -15,6 +16,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
 
 
 input {
