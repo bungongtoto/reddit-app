@@ -47,11 +47,6 @@ const postsSlice = createSlice({
             state.categories.push(post.category);
           }
         }
-        // state.categories = action.payload.map((post) => {
-        //   if (post.category) {
-        //     return post.category;
-        //   }
-        // });
       })
       .addCase(fetchPopularPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -61,6 +56,8 @@ const postsSlice = createSlice({
   },
 });
 
-export const selectPosts = (state) => state.posts.posts;
+export const selectPostById = (state, postId) => {
+  state.posts.posts.find(post => post.id = postId);
+};
 
 export default postsSlice.reducer;
