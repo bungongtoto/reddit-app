@@ -2,9 +2,13 @@ import "./PostTile.css";
 import sampleImg from "../../resources/images/sample-image.png";
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { TfiComments } from "react-icons/tfi";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 function PostTile() {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('post/90')
+  }
   return (
     <div className="postTile">
       <div className="tile-left">
@@ -12,11 +16,11 @@ function PostTile() {
         <p>14.7 k</p>
         <TiArrowDownOutline />
       </div>
-      <div className="tile-right">
+      <div onClick={() => handleClick()} className="tile-right">
         <h1 className="title">Title</h1>
 
         <div className="tile-right-middle">
-          <img src={sampleImg} alt="sample Post Image" />
+          <img src={sampleImg} alt="sample Post" />
         </div>
 
         <div className="tile-right-bottom">

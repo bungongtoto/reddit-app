@@ -29,3 +29,25 @@ input:focus{
   outline: none;
   border-bottom-color:var(--primary-color) ;
 }
+
+.center {
+  margin: auto;
+}
+
+
+button {
+  font-size: 1.3rem;
+  border-color: transparent;
+  border-radius: 5px;
+  background-color: skyblue;
+}
+
+button:hover{
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button:active{
+  background-color: var(--secondary-color);
+  color: white;
+}
