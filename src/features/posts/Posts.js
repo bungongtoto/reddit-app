@@ -2,15 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Posts.css";
 import PostTile from "./PostTile.js";
 import { useEffect } from "react";
-import { fetchPopularPosts } from "./postsSlice.js";
+import { fetchPopularPosts, getSelectedCategory, selectPosts } from "./postsSlice.js";
 import { enqueueSnackbar } from "notistack";
 import { BounceLoader } from "react-spinners";
 
 function Posts() {
-  const { posts, isLoading, isError, error } = useSelector(
+  const {isLoading, isError, error } = useSelector(
     (state) => state.posts
   );
+
+  const posts = useSelector(selectPosts)
   const dispatch = useDispatch();
+  const selectedCategory = useSelector(getSelectedCategory)
 
   useEffect(() => {
     dispatch(fetchPopularPosts());
@@ -19,15 +22,15 @@ function Posts() {
   useEffect(() => {
     if (isError) {
       enqueueSnackbar(`Error Occurred: ${error.message}`, { variant: "error" });
-      enqueueSnackbar(
-        `You migth have ran out of request limit, wait and try again in 1 minute`,
-        { variant: "info" }
-      );
+    //   enqueueSnackbar(
+    //     `You migth have ran out of request limit, wait and try again in 1 minute`,
+    //     { variant: "info" }
+    //   );
     }
   }, [isError, error]);
 
   const postsTiles = posts.map((post, index) => (
-    <PostTile key={index} postId={post.id} />
+    <PostTile key={index} post={post} />
   ));
 
   if (posts.length === 0 && !isLoading ) {
@@ -41,6 +44,7 @@ function Posts() {
 
   return (
     <div className="posts">
+      {selectedCategory && <p>Show post in {selectedCategory} category</p>}
       {isLoading ? (
         <BounceLoader className="center" color="#F34325" />
       ) : (

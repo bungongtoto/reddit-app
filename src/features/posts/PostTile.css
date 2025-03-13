@@ -19,6 +19,10 @@
     width: 80%;
 }
 
+.tile-right h1 {
+    cursor: pointer;
+}
+
 .tile-right-middle{
     width: 100%;
 }

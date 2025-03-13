@@ -1,17 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./CategoryFilter.css";
+import { updateSelectedCategory } from "../posts/postsSlice";
 
 function CategoryFilter() {
-  const handleClick = () => {};
+  const categories = useSelector((state) => state.posts.categories);
+  const dispatch = useDispatch();
+  const handleClick = (category) => {
+    console.log(category);
+    dispatch(updateSelectedCategory(category));
+  };
   return (
     <div className="category-filter">
-      <button>Arts</button>
-      <button>Anime</button>
-      <button>Cinema</button>
-      <button>Movies</button>
-      <button>Arts</button>
-      <button>Anime</button>
-      <button>Cinema</button>
-      <button>Movies</button>
+      {categories.map(category => <button onClick={() => handleClick(category)}>{category}</button>)}
     </div>
   );
 }

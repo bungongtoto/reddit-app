@@ -4,32 +4,33 @@ import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { TfiComments } from "react-icons/tfi";
 import { Link, useNavigate } from "react-router";
 
-function PostTile() {
+function PostTile({post}) {
   const navigate = useNavigate();
+  
   const handleClick = () => {
-    navigate('post/90')
+    navigate(`post/${post.id}`)
   }
   return (
     <div className="postTile">
       <div className="tile-left">
         <TiArrowUpOutline />
-        <p>14.7 k</p>
+        <p>{post.ups}</p>
         <TiArrowDownOutline />
       </div>
-      <div onClick={() => handleClick()} className="tile-right">
-        <h1 className="title">Title</h1>
+      <div className="tile-right">
+        <h1 onClick={() => handleClick()} className="title">{post.title}</h1>
 
         <div className="tile-right-middle">
-          <img src={sampleImg} alt="sample Post" />
+          <img src={post.imageScr} alt="sample Post" />
         </div>
 
         <div className="tile-right-bottom">
           <p>
-            Posted by <Link>kingsley34</Link>
+            Posted by <Link>{post.author}</Link>
           </p>
           <p>7 hours ago</p>
           <p>
-            <TfiComments /> <span>67</span>
+            <TfiComments /> <span>{post.num_comments}</span>
           </p>
         </div>
       </div>
