@@ -6,7 +6,7 @@ function HomePage(){
     return (
         <div className="homePage">
             <Search />
-            <CategoryFilter />
+            <CategoryFilter/>
             <Posts />
         </div>
     )

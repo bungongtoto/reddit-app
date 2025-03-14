@@ -5,7 +5,6 @@ export const fetchPopularPosts = createAsyncThunk(
   async (category = "pics", thunkAPI) => {
     const response = await fetch(`https://www.reddit.com/r/${category}.json`);
     const json = await response.json();
-    console.log(json.data.children);
     return json.data.children.map((post) => {
       return {
         id: post.data.id,
@@ -17,7 +16,7 @@ export const fetchPopularPosts = createAsyncThunk(
         num_comments: post.data.num_comments,
         ups: post.data.ups,
         selftext: post.data.selftext,
-        created: post.data.created
+        created: post.data.created,
       };
     });
   }
@@ -28,20 +27,20 @@ const postsSlice = createSlice({
   initialState: {
     posts: [],
     categories: [],
-    selectedCategory: '',
-    searchTerm: '',
+    selectedCategory: "",
+    searchTerm: "",
     isLoading: false,
     isError: false,
     error: "",
   },
   reducers: {
     updateSelectedCategory: (state, action) => {
-      if (state.selectedCategory === action.payload){
-        state.selectedCategory = ''
-      }else {
+      if (state.selectedCategory === action.payload) {
+        state.selectedCategory = "";
+      } else {
         state.selectedCategory = action.payload;
       }
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -54,14 +53,16 @@ const postsSlice = createSlice({
         state.isError = false;
         state.posts = action.payload;
 
-        action.payload.forEach(post => {
-          if(post.category !== ''){
-            const findcat = state.categories.find(cat => cat === post.category )
-            if (!findcat){
+        action.payload.forEach((post) => {
+          if (post.category !== "") {
+            const findcat = state.categories.find(
+              (cat) => cat === post.category
+            );
+            if (!findcat) {
               state.categories.push(post.category);
             }
           }
-        })
+        });
       })
       .addCase(fetchPopularPosts.rejected, (state, action) => {
         state.isLoading = false;
@@ -72,21 +73,25 @@ const postsSlice = createSlice({
 });
 
 export const selectPostById = (state, postId) => {
-  return state.posts.posts.find(post => post.id = postId);
+  return state.posts.posts.find((post) => (post.id = postId));
 };
 
 export const selectPosts = (state) => {
-  if (state.posts.selectedCategory){
-    return state.posts.posts.filter(post => post.category === state.posts.selectedCategory);
+  if (state.posts.selectedCategory) {
+    return state.posts.posts.filter(
+      (post) => post.category === state.posts.selectedCategory
+    );
   } else {
     return state.posts.posts;
   }
-}
+};
+
+export const getCategories = (state) => state.posts.categories;
 
 export const getSelectedCategory = (state) => {
   return state.posts.selectedCategory;
-}
+};
 
-export const {updateSelectedCategory} = postsSlice.actions
+export const { updateSelectedCategory } = postsSlice.actions;
 
 export default postsSlice.reducer;

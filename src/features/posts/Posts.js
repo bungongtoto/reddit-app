@@ -22,10 +22,6 @@ function Posts() {
   useEffect(() => {
     if (isError) {
       enqueueSnackbar(`Error Occurred: ${error.message}`, { variant: "error" });
-    //   enqueueSnackbar(
-    //     `You migth have ran out of request limit, wait and try again in 1 minute`,
-    //     { variant: "info" }
-    //   );
     }
   }, [isError, error]);
 
