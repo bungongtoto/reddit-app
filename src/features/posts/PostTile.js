@@ -1,15 +1,19 @@
 import "./PostTile.css";
-import sampleImg from "../../resources/images/sample-image.png";
 import { TiArrowDownOutline, TiArrowUpOutline } from "react-icons/ti";
 import { TfiComments } from "react-icons/tfi";
 import { Link, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { addPost } from "./postsSlice";
 
-function PostTile({post}) {
+function PostTile({ post, isDetail }) {
   const navigate = useNavigate();
-  
+  const dispatch = useDispatch();
+
   const handleClick = () => {
-    navigate(`post/${post.id}`)
-  }
+    dispatch(addPost(post));
+    navigate(`/post/${post.id}`);
+  };
+
   return (
     <div className="postTile">
       <div className="tile-left">
@@ -18,7 +22,13 @@ function PostTile({post}) {
         <TiArrowDownOutline />
       </div>
       <div className="tile-right">
-        <h1 onClick={() => handleClick()} className="title">{post.title}</h1>
+        {isDetail ? (
+          <h1>{post.title}</h1>
+        ) : (
+          <h1 onClick={handleClick} className="title">
+            {post.title}
+          </h1>
+        )}
 
         <div className="tile-right-middle">
           <img src={post.imageScr} alt="sample Post" />
@@ -29,9 +39,11 @@ function PostTile({post}) {
             Posted by <Link>{post.author}</Link>
           </p>
           <p>7 hours ago</p>
-          <p>
-            <TfiComments /> <span>{post.num_comments}</span>
-          </p>
+          {!isDetail && (
+            <p>
+              <TfiComments /> <span>{post.num_comments}</span>
+            </p>
+          )}
         </div>
       </div>
     </div>

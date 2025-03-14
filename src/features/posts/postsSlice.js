@@ -34,6 +34,14 @@ const postsSlice = createSlice({
     error: "",
   },
   reducers: {
+    addPost: (state, action) => {
+      const alreadyExist = state.posts.find(post => post.id === action.payload.id);
+
+      if (!alreadyExist){
+
+        state.posts.push(action.payload);
+      }
+    },
     updateSelectedCategory: (state, action) => {
       if (state.selectedCategory === action.payload) {
         state.selectedCategory = "";
@@ -72,9 +80,8 @@ const postsSlice = createSlice({
   },
 });
 
-export const selectPostById = (state, postId) => {
-  return state.posts.posts.find((post) => (post.id = postId));
-};
+export const selectPostById = (state, postId) =>  state.posts.posts.find((post) => (post.id === postId)) || null;
+
 
 export const selectPosts = (state) => {
   if (state.posts.selectedCategory) {
@@ -92,6 +99,6 @@ export const getSelectedCategory = (state) => {
   return state.posts.selectedCategory;
 };
 
-export const { updateSelectedCategory } = postsSlice.actions;
+export const {addPost,  updateSelectedCategory } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -3,10 +3,12 @@ import "./Posts.css";
 import PostTile from "./PostTile.js";
 import { useEffect } from "react";
 import { fetchPopularPosts, getSelectedCategory, selectPosts } from "./postsSlice.js";
-import { enqueueSnackbar } from "notistack";
+import { useSnackbar } from "notistack";
 import { BounceLoader } from "react-spinners";
 
+
 function Posts() {
+  const {enqueueSnackbar, closeSnackbar } = useSnackbar()
   const {isLoading, isError, error } = useSelector(
     (state) => state.posts
   );
@@ -21,12 +23,14 @@ function Posts() {
 
   useEffect(() => {
     if (isError) {
-      enqueueSnackbar(`Error Occurred: ${error.message}`, { variant: "error" });
+     const key =  enqueueSnackbar(`Error Occurred: ${error.message}`, { variant: "error" });
+
+     return () => closeSnackbar(key);
     }
-  }, [isError, error]);
+  }, [isError, error,closeSnackbar, enqueueSnackbar]);
 
   const postsTiles = posts.map((post, index) => (
-    <PostTile key={index} post={post} />
+    <PostTile key={index} post={post} isDetail={false} />
   ));
 
   if (posts.length === 0 && !isLoading ) {

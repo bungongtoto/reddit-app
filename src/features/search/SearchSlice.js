@@ -56,10 +56,6 @@ const searchSlice = createSlice({
   },
 });
 
-export const selectSearchPostById = (state, postId) => {
-  return state.search.posts.find((post) => (post.id = postId));
-};
-
 export const selectSearchPosts = (state) => {
   
     return state.search.posts;
