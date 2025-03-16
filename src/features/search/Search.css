@@ -1,20 +1,19 @@
 .search{
-    width: 100%;
+    width: 50%;
     text-align: center;
 
 }
 
 .search form {
-    width: 70%;
+    width: 100%;
     margin: auto;
     display: flex;
-    justify-content: space-evenly;
 }
 
 .search input {
     width: 70%;
     font-size: 1.5rem;
-    margin-right: 20px;
+    background-color: rgb(255, 217, 168);
 }
 
 .search button {
@@ -25,6 +24,10 @@
 
 .search button:hover {
     color: var(--primary-color);
+}
+
+.search input:focus {
+    background-color: white;
 }
 
 .search button:active{

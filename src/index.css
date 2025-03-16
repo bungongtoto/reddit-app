@@ -40,6 +40,7 @@ button {
   border-color: transparent;
   border-radius: 5px;
   background-color: skyblue;
+  cursor: pointer;
 }
 
 button:hover{

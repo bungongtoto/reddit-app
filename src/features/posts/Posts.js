@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Posts.css";
 import PostTile from "./PostTile.js";
 import { useEffect } from "react";
-import { fetchPopularPosts, getSelectedCategory, selectPosts } from "./postsSlice.js";
+import { fetchPopularPosts, selectPosts } from "./postsSlice.js";
 import { useSnackbar } from "notistack";
 import { BounceLoader } from "react-spinners";
 
@@ -15,7 +15,6 @@ function Posts() {
 
   const posts = useSelector(selectPosts)
   const dispatch = useDispatch();
-  const selectedCategory = useSelector(getSelectedCategory)
 
   useEffect(() => {
     dispatch(fetchPopularPosts());
@@ -44,7 +43,6 @@ function Posts() {
 
   return (
     <div className="posts">
-      {selectedCategory && <p>Show post in {selectedCategory} category</p>}
       {isLoading ? (
         <BounceLoader className="center" color="#F34325" />
       ) : (

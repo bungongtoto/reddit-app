@@ -10,15 +10,8 @@ export const searchPosts = createAsyncThunk(
       console.log(json)
       return json.data.children.map((post) => {
         return {
-          id: post.data.id,
-          author: post.data.author,
-          title: post.data.title,
-          permalink: post.data.permalink,
-          imageScr: post.data.url,
-          num_comments: post.data.num_comments,
-          ups: post.data.ups,
-          selftext: post.data.selftext,
-          created: post.data.created,
+          ...post.data,
+          comments: [],
         };
       });
     }
@@ -29,12 +22,15 @@ const searchSlice = createSlice({
   name: "search",
   initialState: {
     posts: [],
+    searchTerm: '',
     isLoading: false,
     isError: false,
     error: "",
   },
   reducers: {
-    
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -56,10 +52,17 @@ const searchSlice = createSlice({
   },
 });
 
+export const {setSearchTerm} = searchSlice.actions;
+
 export const selectSearchPosts = (state) => {
   
     return state.search.posts;
 
 };
+
+export const selectSearchTerm = (state) => {
+  return state.search.searchTerm;
+}
+
 
 export default searchSlice.reducer;

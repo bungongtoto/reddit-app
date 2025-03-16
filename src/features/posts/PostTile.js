@@ -31,7 +31,7 @@ function PostTile({ post, isDetail }) {
         )}
 
         <div className="tile-right-middle">
-          <img src={post.imageScr} alt="sample Post" />
+          <img src={post.url} alt="sample Post" />
         </div>
 
         <div className="tile-right-bottom">

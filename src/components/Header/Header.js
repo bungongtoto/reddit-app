@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import logo from "../../resources/images/reddit-logo.svg";
+import Search from '../../features/search/Search'
 import "./Header.css";
 
 function Header() {
@@ -8,6 +9,7 @@ function Header() {
       <NavLink to={"/"}>
         <img src={logo} alt="Reddit Logo" />
       </NavLink>
+      <Search />
     </div>
   );
 }
