@@ -30,6 +30,9 @@ const postsSlice = createSlice({
     isLoading: false,
     isError: false,
     error: "",
+    isCommentLoading: false,
+    isCommentError: false,
+    errorComment: "",
   },
   reducers: {
     addPost: (state, action) => {
@@ -59,19 +62,20 @@ const postsSlice = createSlice({
         state.error = action.error;
       })
       .addCase(fetchPostComments.pending, (state, action) => {
-        state.isLoading = true;
-        state.isError = false;
+        state.isCommentLoading = true;
+        state.isCommentError = false;
       })
       .addCase(fetchPostComments.fulfilled, (state, action) => {
-        state.isError = false;
+        state.isCommentError = false;
+        state.isCommentLoading = false;
         const indexOfPost = state.posts.findIndex(post => post.id === action.payload.id);
         state.posts[indexOfPost].comments = action.payload.data;
-        state.isLoading = false;
+        
       })
       .addCase(fetchPostComments.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.error = action.error;
+        state.isCommentLoading = false;
+        state.isCommentError = true;
+        state.errorComment = action.error;
       });
   },
 });

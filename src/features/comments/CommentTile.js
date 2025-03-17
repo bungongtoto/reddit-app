@@ -1,7 +1,11 @@
-function CommentTile(){
+import { Link } from 'react-router';
+import './Comments.css'
+
+function CommentTile({comment}){
     return (
-        <div>
-            <h1>Comment Tile</h1>
+        <div className="comment-tile">
+            <Link>{comment.author}</Link>
+            <p>{comment.body}</p>
         </div>
     )
 }
