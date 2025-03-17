@@ -1,4 +1,6 @@
-function Comments(){
+function Comments({comments}){
+
+
     return (
         <div>
             <h1>Comments</h1>

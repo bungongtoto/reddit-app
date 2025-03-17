@@ -14,6 +14,15 @@ export const fetchPopularPosts = createAsyncThunk(
   }
 );
 
+export const fetchPostComments = createAsyncThunk(
+  "posts/fetchPostComments",
+  async ({permalink, id}, thunkAPI) => {
+    const response = await fetch(`https://www.reddit.com${permalink}.json`);
+    const json = await response.json();
+    return {data: json[1].data.children.map(child => child.data), id};
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState: {
@@ -45,6 +54,21 @@ const postsSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(fetchPopularPosts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.error = action.error;
+      })
+      .addCase(fetchPostComments.pending, (state, action) => {
+        state.isLoading = true;
+        state.isError = false;
+      })
+      .addCase(fetchPostComments.fulfilled, (state, action) => {
+        state.isError = false;
+        const indexOfPost = state.posts.findIndex(post => post.id === action.payload.id);
+        state.posts[indexOfPost].comments = action.payload.data;
+        state.isLoading = false;
+      })
+      .addCase(fetchPostComments.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.error = action.error;
