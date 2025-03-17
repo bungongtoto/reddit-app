@@ -1,6 +1,5 @@
 .postTile {
-    width: 80%;
-    margin: auto;
+    width: 100%;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
