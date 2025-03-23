@@ -8,9 +8,10 @@ import PostDetailPage from "../pages/PostDetailPage";
 
 /*
  * Here are the things you still have to do on this project
+    -refactor code for state transfer between components;
+    - do the test case 
     - make search to also filter existing post and add to the search results
     - work on the state
-    - do the test case 
     - work on the comment to be able show replies
     - make it responsive
  * 

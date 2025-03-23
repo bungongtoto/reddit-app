@@ -1,24 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import "./Posts.css";
 import PostTile from "./PostTile.js";
 import { useEffect } from "react";
-import { fetchPopularPosts, selectPosts } from "./postsSlice.js";
 import { useSnackbar } from "notistack";
 import { BounceLoader } from "react-spinners";
 
 
-function Posts() {
+function Posts({posts, isLoading, isError, error, handleRefresh}) {
   const {enqueueSnackbar, closeSnackbar } = useSnackbar()
-  const {isLoading, isError, error } = useSelector(
-    (state) => state.posts
-  );
-
-  const posts = useSelector(selectPosts)
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchPopularPosts());
-  }, [dispatch]);
 
   useEffect(() => {
     if (isError) {
@@ -36,7 +24,7 @@ function Posts() {
     return (
       <div className="posts">
         <p>No Post Available</p>
-        <button onClick={() => dispatch(fetchPopularPosts())}>Retry</button>
+        <button onClick={handleRefresh}>Retry</button>
       </div>
     );
   }
