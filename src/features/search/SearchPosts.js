@@ -1,24 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import '../posts/Posts.css';
 import PostTile from "../posts/PostTile.js";
 import { useEffect } from "react";
 import { enqueueSnackbar } from "notistack";
 import { BounceLoader } from "react-spinners";
-import { searchPosts, selectSearchPosts } from "./SearchSlice.js";
 import { useNavigate } from "react-router";
 
-function SearchPost({search}) {
+function SearchPost({posts,search , isLoading, isError, error, handleRefresh}) {
     const navigate = useNavigate()
-    const {isLoading, isError, error } = useSelector(
-        (state) => state.search
-      );
-    
-      const posts = useSelector(selectSearchPosts)
-      const dispatch = useDispatch();
-    
-      useEffect(() => {
-        dispatch(searchPosts(search));
-      }, [dispatch, search]);
     
       useEffect(() => {
         if (isError) {
@@ -34,7 +22,7 @@ function SearchPost({search}) {
         return (
           <div className="posts">
             <p>An error Ocurred while searching {search}</p>
-            <button onClick={() => dispatch(searchPosts(search))}>Retry</button>
+            <button onClick={handleRefresh}>Retry</button>
             <br></br>
             <br></br>
             <button onClick={() => navigate('/') }>Back Home</button>
